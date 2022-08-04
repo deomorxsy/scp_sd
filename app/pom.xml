@@ -30,7 +30,7 @@
         <version>3.2.1</version>
         <configuration>
           <to>
-              <image>docker.io/deomorxsy/projlib</image>
+              <image>docker.io/deomorxsy/scp_sd</image>
           </to>
         </configuration>
       </plugin>
