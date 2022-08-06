@@ -1,9 +1,9 @@
-package autosys;
+package app;
 
 import java.io.*;
 import java.net.*;
 
-public class main {
+public class Main {
 	public static void main(String[] args) {
 		try {
 			ServerSocket foo = new ServerSocket(4040);
