@@ -10,10 +10,10 @@ public class Usuario {
     public Usuario() {
     };
 
-    public Usuario(String cpf, String nome, LocalDate dataNascimento) {
+    public Usuario(String cpf, String nome /*LocalDate dataNascimento*/) {
         this.cpf = cpf;
         this.nome = nome;
-        this.dataNascimento = dataNascimento;
+        /*this.dataNascimento = dataNascimento;*/
     };
 
     public void setCPF(String cpf) {

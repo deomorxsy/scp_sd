@@ -10,8 +10,8 @@ public class Estudante extends Usuario {
     public Estudante() {
     };
 
-    public Estudante(String cpf, String nome, LocalDate dataNascimento, String matricula) {
-        super(cpf, nome, dataNascimento);
+    public Estudante(String cpf, String nome, /*LocalDate dataNascimento, */String matricula) {
+        super(cpf, nome/*, dataNascimento*/);
         this.matricula = matricula;
     };
 

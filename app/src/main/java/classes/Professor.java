@@ -9,8 +9,8 @@ public class Professor extends Usuario {
     public Professor() {
     };
 
-    public Professor(String cpf, String nome, LocalDate dataNascimento, String registro, Disciplina disciplina) {
-        super(cpf, nome, dataNascimento);
+    public Professor(String cpf, String nome, /*LocalDate dataNascimento,*/ String registro, Disciplina disciplina) {
+        super(cpf, nome/*, dataNascimento*/);
         this.registro = registro;
         this.disciplina = disciplina;
     };
