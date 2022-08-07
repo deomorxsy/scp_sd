@@ -1,24 +1,26 @@
 package portAcad;
+import portAcad.*;
 
 import java.net.*;
 import java.io.*;
-import java.util.*;
+import java.util.concurrent.*; //for Callable
+import java.util.concurrent.ExecutorService;
+import java.util.Date;
 
 
-
-private static class webServer implements Callable<Void> {
+class webServer implements Callable<Void> {
     private Socket connection;
 
-    webserver(Socket connection) {
-        this.connection = connection
+    webServer(Socket connection) {
+        this.connection = connection;
     }
 
-    @Override
-    public void call() {
+    //@Override
+    public Void call() {
         try {
             Writer out = new OutputStreamWriter(connection.getOutputStream());
             Date now = new Date();
-            out.Write(now.toString() + "\r\n");
+            out.write(now.toString() + "\r\n");
             out.flush();
 
         } catch (IOException ex) {
@@ -26,8 +28,10 @@ private static class webServer implements Callable<Void> {
          } finally {
             try {
                 connection.close();
-            } catch (IOException ex) {}
+            } catch (IOException e) {}
          }
 
         return null;
     }
+
+}
