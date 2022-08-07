@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package app;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -14,5 +15,42 @@ public class webServer {
         }catch (Exception e) {
 			System.out.println(e);
 		}
+=======
+package portAcad;
+import portAcad.*;
+
+import java.net.*;
+import java.io.*;
+import java.util.concurrent.*; //for Callable
+import java.util.concurrent.ExecutorService;
+import java.util.Date;
+
+
+class webServer implements Callable<Void> {
+    private Socket connection;
+
+    webServer(Socket connection) {
+        this.connection = connection;
+>>>>>>> becf7958617c6fe23940ca8632ef2c8617148635
     }
+
+    //@Override
+    public Void call() {
+        try {
+            Writer out = new OutputStreamWriter(connection.getOutputStream());
+            Date now = new Date();
+            out.write(now.toString() + "\r\n");
+            out.flush();
+
+        } catch (IOException ex) {
+            System.err.println(ex);
+         } finally {
+            try {
+                connection.close();
+            } catch (IOException e) {}
+         }
+
+        return null;
+    }
+
 }

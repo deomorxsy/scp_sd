@@ -16,17 +16,31 @@
     <maven.compiler.target>17</maven.compiler.target>
   </properties>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> becf7958617c6fe23940ca8632ef2c8617148635
   <build>
-    <plugins>
+      <plugins>
+
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.0.0</version>
+            <configuration>
+                <mainClass>portAcad.pooledServer</mainClass>
+            </configuration>
+        </plugin>
+
 		<!--JIB PLUGIN -->
 		<plugin>
         <groupId>com.google.cloud.tools</groupId>
         <artifactId>jib-maven-plugin</artifactId>
         <version>3.2.1</version>
         <configuration>
-          <to>
-              <image>docker.io/deomorxsy/scp_sd</image>
-          </to>
+            <to>
+                <image>docker.io/deomorxsy/scp_sd</image>
+            </to>
         </configuration>
       </plugin>
 </plugins>
