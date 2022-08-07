@@ -10,6 +10,9 @@ public class pooledServer {
 
     public final static int PORT = 8080;
 	public static void main(String[] args) throws Exception {
+
+        ExecutorService pool = Executors.newFixedThreadPool(50);
+
         ServerSocket server = new ServerSocket(PORT);
         System.out.println("Startando in 127.0.0.1:8080 ///\n Listening for connection...");
         while (true ) {
@@ -17,10 +20,13 @@ public class pooledServer {
             /*Since HTTP is stateless, it does not need to store previous connections, so a loop is started, listening to a port, an integer passed as argument to the method, for any connection.
               Since
               */
-            try(Socket clientOnSocks = server.accept()) {
+            try(Socket connection = server.accept()) {
+
+                Callable<Void> task = new webServer(connection);
             Thread task = new webserver(connection);
             task.start();
             System.out.println("Startado: ggwp");
+            // RESPONSE
             //Date today = new Date();
             //String response = "HTTP/1.1 200 OKI, ACK!! \n" + today;
             //clientOnSocks.getOutputStream()
