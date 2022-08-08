@@ -8,7 +8,7 @@ import java.net.ServerSocket;
 import java.io.*;
 import java.util.concurrent.*;
 
-public class main  {
+public class test2  {
 	public final static int PORT = 8080;
 	public final static int numThreadsToSpawn = 10;
     public static void main(String[] args) throws IOException {

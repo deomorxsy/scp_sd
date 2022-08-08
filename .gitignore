@@ -1,3 +1,7 @@
+#app dir
+scp_sd/app/src/main/java/app/test.java
+scp_sd/app/src/main/java/app/test2.java
+
 # Compiled class file
 *.class
 

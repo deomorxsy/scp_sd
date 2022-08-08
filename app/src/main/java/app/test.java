@@ -8,7 +8,7 @@ import java.net.ServerSocket;
 import java.io.*;
 import java.util.concurrent.*;
 
-public class main  {
+public class test  {
 	public final static int PORT = 8080;
 	public final static int numThreadsToSpawn = 10;
     public static void main(String[] args) throws IOException {
@@ -40,43 +40,17 @@ public class main  {
                     //BufferedReader bar =  new BufferedReader(new InputStreamReader(foo, "UTF-8"));
 
                     //in
-
-					OutputStream raw = new BufferedOutputStream(socket.getOutputStream());
-					 Writer out = new OutputStreamWriter(raw);
-										BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream())); //works
+                    BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream())); //works
                     String foobar = in.readLine();
                     while (!(foobar.isEmpty())){
                         System.out.println(foobar);
                         foobar = in.readLine();
-                    }        //return null;
+                    }        return null;
 
-                   // Writer out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), "testando output"));
+                   // Writer out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), "hmmm acho uqe deu certo hein"));
                     //return null;
 
-
-					 //StringBuilder requestLine = new StringBuilder();
-					 //while (true) {
-					 //    int c = in.read();
-					 //    if (c == '\r' || c == '\n') break;
-					 //   requestLine.append((char) c);
-					 //    }
-
-
-
-					String body = new StringBuilder("<HTML>\r\n")
-					 .append("<HEAD><TITLE>File Not Found</TITLE>\r\n")
-					 .append("</HEAD>\r\n")
-					 .append("<BODY>")
-					 .append("<H1>HTTP Error 404: File Not Found</H1>\r\n")
-					 .append("</BODY></HTML>\r\n").toString();
-                     out.write(body);
-					 //String get = requestLine.toString();
-
-
-
-
-                     return null;
-				}
+                 }
             }); //pool.execute closing brackets
         }
     }

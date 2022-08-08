@@ -1,4 +1,4 @@
-## scp_sd
+## scp\_sd
 
 Sockets lecture practice for Distributed Systems course. // WIP
 

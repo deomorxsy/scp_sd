@@ -11,11 +11,11 @@ public class pooledServer {
 
     public final static int PORT = 8080;
 	public static void main(String[] args) throws Exception {
-
+        //ExecutorService interface lets you submit tasks and control their execution and termination.
         ExecutorService pool = Executors.newFixedThreadPool(10);
 
         ServerSocket server = new ServerSocket(PORT);
-        System.out.println("Startando in 127.0.0.1:8080 ///\n Listening for connection...");
+        System.out.println("Startando in 127.0.0.1:8080 ///\n|=> Listening for connection...");
         while (true ) {
             // 0- instance of ServerSocket opens the socket.
             /*Since HTTP is stateless, it does not need to store previous connections, so a loop is started, listening to a port, an integer passed as argument to the method, for any connection.
@@ -23,8 +23,10 @@ public class pooledServer {
               */
             try(Socket connection = server.accept()) {
 
+
+                // new instance of Callable, passed as argument of submit() to the Thread Pool returns a Future instance.
                 Callable<Void> task = new webServer(connection);
-                pool.submit(task);
+                //Future<String> futRequest = pool.submit(task); // returns Future
 
                 //Thread task = new webserver(connection);
                 //task.start();
