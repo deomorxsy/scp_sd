@@ -11,6 +11,7 @@ Build
 ```
 
 Run with mvn compile exec.
+> PS: check the mainClass in pom.xml before running
 ```
-# mvn compile exec:java -Dexec.mainClass="portAcad.pooledServer"
+# mvn compile exec:java -Dexec.mainClass="portAcad.main"
 ```
