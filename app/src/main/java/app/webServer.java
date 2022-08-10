@@ -1,32 +1,37 @@
-import java.net.Socket;
-import java.net.ServerSocket;
+package portAcad;
+import portAcad.*;
+
+import java.net.*;
 import java.io.*;
-
-public class webServer {
-	public static void main(String[] args) throws Exception {
-        ServerSocket server = new ServerSocket(8080);
-        System.out.println("Startando in 127.0.0.1:8080 ///\n Listening for connection...");
-        while (true ) {
-            // 0- instance of ServerSocket opens the socket.
-            /*Since HTTP is stateless, it does not need to store previous connections, so a loop is started, listening to a port, an integer passed as argument to the method, for any connection.
-              Since
-              */
-            Socket clientOnSocks = server.accept();
-            System.out.println("Startado: ggwp");
-            // 1- read HTTP request
-            // 2- generate response
-            // 3- sends back a HTTP response
-            // 4- close the socket
-            //foo = clientOnSocks.getInputStream();
-            InputStreamReader bar = new InputStreamReader(clientOnSocks.getInputStream());
-            BufferedReader foobar =  new BufferedReader(bar);
-            String waldo = foobar.readLine();
-            while (!(waldo.isEmpty())){
-                System.out.println(waldo);
-                waldo = foobar.readLine();
-            }
+import java.util.concurrent.*; //for Callable
+import java.util.concurrent.ExecutorService;
+import java.util.Date;
 
 
-        }
+class webServer implements Callable<Void> {
+    private Socket connection;
+
+    webServer(Socket connection) {
+        this.connection = connection;
     }
+
+    //@Override
+    public Void call() {
+        try {
+            Writer out = new OutputStreamWriter(connection.getOutputStream());
+            Date now = new Date();
+            out.write(now.toString() + "\r\n");
+            out.flush();
+
+        } catch (IOException ex) {
+            System.err.println(ex);
+         } finally {
+            try {
+                connection.close();
+            } catch (IOException e) {}
+         }
+
+        return null;
+    }
+
 }
