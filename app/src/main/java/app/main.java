@@ -17,7 +17,7 @@ public class main  {
         // Replace with suitable executor
         ExecutorService pool = Executors.newFixedThreadPool(numThreadsToSpawn); //10
         ServerSocket serverSocket = new ServerSocket(8080); //8080
-		System.out.println("Startando in 127.0.0.1:8080 ///\n|=> Listening for connection...");
+		System.out.println("Startando in 127.0.0.1:8080 ////\n|=> Listening for connection...");
 
         while (true) {
             final Socket socket = serverSocket.accept();
