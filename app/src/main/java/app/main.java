@@ -5,27 +5,55 @@ import portAcad.*;
 import java.net.Socket;
 import java.net.Socket.*;
 import java.net.ServerSocket;
+import java.net.URLConnection;
+import javax.net.ssl.*;
 import java.io.*;
 import java.util.concurrent.*;
-import java.net.URLConnection;
+// Get host ip
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 
 
 public class main  {
 	public final static int PORT = 8080;
+	//public static final String HOST = "192.168.0.3";  // change to current machine IP
 	public final static int numThreadsToSpawn = 10;
     public static void main(String[] args) throws IOException {
         // Replace with suitable executor
         ExecutorService pool = Executors.newFixedThreadPool(numThreadsToSpawn); //10
-        ServerSocket serverSocket = new ServerSocket(8080); //8080
-		System.out.println("Startando in 127.0.0.1:8080 ///\n|=> Listening for connection...");
+
+    // get host ip
+        try(final DatagramSocket socketUDP = new DatagramSocket()) {
+          socketUDP.connect(InetAddress.getByName("8.8.8.8"), 10002);
+          String host = socketUDP.getLocalAddress().getHostAddress().toString();
+        }  catch (IOException e) {
+                // Handle exception
+                System.err.println("/// Couldn't get machine ip.");
+
+            }
+
+
+
+		/// Implements SSL tunnel for the previous ServerSocket, check git history or commented code.
+		/// One of the  main differences between javax.net.SSL.SSLSocketFactory (subclass of java.netSocket) is that it uses a method instead of a constructor to create a socket.
+		SSLSocketFactory factory
+		 = (SSLSocketFactory) SSLSocketFactory.getDefault();
+
+		//SSLSocketFactory socketSSL = null;
+
+
+        ServerSocket serverSocket = new ServerSocket(PORT); //8080
+        System.out.println("\n========= SUBINDO NOVA THREAD =========\n");
+		System.out.println("Startando in 127.0.0.1:8080 ///\n|=> Listening for connection...\n");
 
         while (true) {
-            final Socket socket = serverSocket.accept();
+            final Socket serverSocket = serverSocket.accept();
+			//SSLSocket socketSSL = factory.createSocket("192.168.0.3", PORT);
             pool.execute(new Runnable() {
 
                 public void run() { // it seems run can't throws IOException. For that, call() is used
 					try {
-                        handleSocket(socket, numThreadsToSpawn);
+                        handleSocket(serverSocket, numThreadsToSpawn); // 10 (default) Threads to Spawn
                     } catch (IOException e) {
                         // Handle exception
 						System.out.println("/// Couldn't open server.");
@@ -90,6 +118,10 @@ public class main  {
 							URLConnection.getFileNameMap().getContentTypeFor(fileName);
 						if (tokens.length > 2) {
 							httpVersion = tokens[2];
+
+///if(theFile.canRead()){
+
+///}
 						}
 					}
 					String body = new StringBuilder("<HTML>\r\n")
